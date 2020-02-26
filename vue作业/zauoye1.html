@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="./js/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<button :disabled="mydisabled">{{test}}</button>
+		</div>
+		<script>
+			var vm = new Vue({
+				el:"#app",
+				data:{
+					mydisabled:true,
+					test:"10"
+				},
+				mounted:function(){
+					var timi = setInterval(()=>{
+						console.log(this)
+						this.test--;
+						if(this.test == 0){
+							clearInterval(timi);
+							this.mydisabled = false;
+							this.test = '提交';
+						}
+					},1000)
+				}
+			})
+		</script>
+	</body>
+</html>
