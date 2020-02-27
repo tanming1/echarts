@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script type="text/javascript" src="../js/vue.js"></script>
+	</head>
+	<style>
+		table tr td,table tr th{
+			border: 1px solid #000000;
+		}
+			
+
+	</style>
+	<body>
+		<div id="app">
+			<table>
+				<tr>
+					<th>商品名称</th>
+					<th>商品价格</th>
+					<th>商品数量</th>
+					<th>操作</th>
+				</tr>
+				<tr v-for="item in sparr">
+					<td>{{item.name}}</td>
+					<td>{{item.price}}</td>
+					<td><button @click="jian(item)">－</button>{{item.num}}<button @click="jia(item)">＋</button></td>
+					<td><button>添加购物车</button></td>
+				</tr>
+			</table>
+		</div>
+		<script>
+			var vm = new Vue({
+				el:"#app",
+				data:{
+					sparr:[
+						{"name":"iphone x","price":5000,num:1},
+						{"name":"三星","price":4000,num:1},
+						{"name":"华为","price":3000,num:1},
+						{"name":"小米","price":2000,num:1}
+					],
+				},
+				methods:{
+					jian:function(item){
+						if(item.num >= 1 ){
+							item.num--;
+						}
+					},
+					jia:function(item){
+						item.num++;
+					}
+				}
+			})
+		</script>
+	</body>
+</html>
