@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>豆瓣作业</title>
+		<script src="js/axios.min.js"></script>
+		<script src="js/vue.js"></script>
+		<meta name="referrer" content="no-referrer" />
+	</head>
+	<style>
+		*{padding:0;margin:0;}
+		ul,li{list-style:none;}
+		.list{display: flex; flex-wrap: nowrap; flex-direction: row;overflow-x: scroll;}
+		.list li{}
+		.list li div{width: 80px; height:110px; margin:5px; background: lightblue; }
+		.list li div img{width:80px; height:100px;}
+	</style>
+	<body>
+		<div id="app">
+			<filmitst text="国产剧" :filmarr="dianshijulist"></filmitst>
+			<filmitst text="综艺节目"></filmitst>
+			<filmitst text='英美剧'></filmitst>
+		</div>
+		<script>
+			var filmitem = {
+				props:["i"],
+				template:`
+				<li>
+					<div>
+						<img:src="i.cover.url" />
+						{{i.title}}
+					</div>
+				</li>
+				`
+			}
+			var filmitst = {
+				props:['text',"filmarr"],
+				template:`
+				<div>
+					<h2>近期值得看{{text}}</h2>
+					<ul class = "list">
+						<filmitem v-for="(item,index) in filmarr" i="item"></filmitem>
+					</ul>
+				</div>
+				`,
+				components:{
+					filmitem
+				}
+			}
+		
+		
+		
+		
+		
+			var VM = new Vue({
+				el:'#app',
+				data:{
+					dianshijulist:[],
+					
+				},
+				mounted:function(){
+					axios.get("josn/dianshiju.json").then((data)=>{
+						console.log(data);
+						this.dianshijulist = data.data.subject_collection_items;
+					}).catch((error)=>{
+						console.log(error);
+					}),
+					
+					axios.get("josn/zongyi.json").then((data)=>{
+						console.log(data);
+						this.dianshijulist = data.data.subject_collection_items;
+					}).catch((error)=>{
+						console.log(error);
+					}),
+					
+					axios.get("josn/yingmei.json").then((data)=>{
+						console.log(data);
+						this.dianshijulist = data.data.subject_collection_items;
+					}).catch((error)=>{
+						console.log(error);
+					})
+				},
+				components:{
+					filmitst
+				}
+			})
+		</script>
+	</body>
+</html>
