@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="./vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<tanming></tanming>
+		</div>
+		<script>
+			var tanming = {
+				props:[],
+				data:function(){
+					return {
+						test:"hello"
+					}
+				},
+				template:`
+				<div>我是渲染组件</div>
+				`,
+				
+				computed:{},//计算属性
+				watch:{},//事件监听
+				methods:{},//方法
+				components:{},//引入子组件
+				//一系列钩子函数
+				beforeCreate:function(){},
+				crertde:function(){},
+				beforeMount:function(){},
+				mounted:function(){},
+		
+		
+		
+		
+			}
+			/******************************************************************/
+			var vm = new Vue({
+				el:"#app",
+				data:{},
+				components:{
+					tanming
+				}
+			})
+		</script>
+	</body>
+</html>

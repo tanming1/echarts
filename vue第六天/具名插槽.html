@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="../js/vue.js"></script>
+	</head>
+		<style>
+			ul li {
+				list-style: none;
+			}
+		</style>
+	<body>
+		<div id="app">
+			<chacao>
+				<span slot='center'>cpu</span>
+				<span slot='io'>显卡</span>
+				<span slot='io'>声卡</span>
+				<span slot='io'>光驱</span>
+			</chacao>
+		</div>
+		<script>
+			var chacao = {
+				template:`
+				<div>
+				<ul>
+				<li>嘻嘻:<slot name = 'io'></slot> </li>
+				<li>哈哈:<slot name = 'center'></slot> </li>
+				</ul>
+				</div>
+				`
+			}
+			/************************************************************/
+			var vm = new Vue({
+				el:"#app",
+				data:{},
+				components:{
+					chacao
+				}
+			})
+		</script>
+	</body>
+</html>

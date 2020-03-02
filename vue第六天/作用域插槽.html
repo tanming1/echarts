@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="../js/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<zujian>
+				<span>显卡</span>
+				<span>光驱</span>
+				<span>声卡</span>
+				<span>cpu</span>
+			</zujian>
+		</div>
+		<script>
+			var zujian ={
+				template:`<div>
+				主机箱零件包括:
+					<slot></slot>
+				</div>
+				`
+			}
+			
+			
+			
+			
+			/********************************************************/
+			var vm = new Vue({
+				el:"#app",
+				data:{},
+				components:{
+					zujian
+				}
+			})
+		</script>
+	</body>
+</html>
