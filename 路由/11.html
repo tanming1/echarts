@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="../js/axios.min.js"></script>
+		<script src="../js/vue-router.js"></script>
+		<script src="../js/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<router-link to="/mylist">列表页</router-link>
+			<router-link to="/myitem">内容页</router-link>
+			<router-view> </router-view>
+		</div>
+		<script>
+			var mylist = {
+				template: `
+					<div>列表页</div>
+				`,
+			};
+			var myitem = {
+				template: `
+					<div>内容页</div>
+				`,
+			};
+			var routes = [{
+					"path": "/mylist",
+					"component": mylist
+				},
+				{
+					"path": "/myitem",
+					"component": myitem
+				}
+			]
+
+			var router = new VueRouter({
+				routes: routes
+			})
+			/*************************************/
+			var vm = new Vue({
+				el: "#app",
+				data: {
+
+				},
+				router: router
+			})
+		</script>
+	</body>
+</html>

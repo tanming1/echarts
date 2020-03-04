@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="../js/vue.js"></script>
+		<script src="../js/vue-router.js"></script>
+		<script src="../js/axios.min.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<router-link to="/mylist">列表页</router-link>
+			<router-link to="/myitem">内容页</router-link>
+			<router-view>  </router-view>
+		</div>
+		<script>
+			var mylist = {
+				data:function(){
+					return{
+						list:[]
+					}
+				},
+				template:`
+				<div>列表页
+					<ul>
+						<li v-for="(item,index) in list">{{item.proTitle}}</li>
+					</ul>
+				</div>
+				`,
+				mounted:function(){
+					axios.post("http://www.51houniao.com/product/product/getProductRecommendUser",{
+						desc: false,
+						orderBy: "top",
+						pageNow: 1,
+						pageSize: 20,
+						seller_user_id: "4bc4027c645343f09a964b5c2e9f875b"
+					}).then((res)=>{
+						console.log(res);
+						this.list = res.data;
+					})
+				},
+			};
+			var myitem = {
+				template:`<div>内容页
+				
+				</div>`,
+			};
+			var routes = [
+				{'path':'/mylist','component':mylist},
+				{'path':'/myitem','component':myitem},
+
+			];
+			var router = new VueRouter({
+				routes:routes
+			})
+			/*******************************/
+			var vm = new Vue({
+				el:"#app",
+				data:{
+				},
+				router:router
+			})
+		</script>
+	</body>
+</html>

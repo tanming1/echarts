@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/vue-router.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<style></style>
+	<body>
+		<div id='app'>
+			<ul>
+				<li v-for="(item,index) in movieArr ">
+					<router-link :to="'/movieitem/'+item.id">{{item.title}}</router-link>
+				</li>
+			</ul>
+			<router-view></router-view>
+		</div>
+		<script>
+			var movieitem = {
+				template:`<div>
+					<h2>电影内容</h2>
+					<div>电影id是：{{$route.params}}</div>
+				</div>`,
+				meunted:function(){
+				},
+				watch:{
+					'$route'(to,from){
+						
+					}
+				}
+			}
+			
+			var routes = [
+				{'path':'/movieitem/:movieid',component:movieitem}
+			] ;
+			var router = new VueRouter({
+				routes:routes
+			})
+			
+			/*****************************************/
+			var vm = new Vue({
+				el:"#app",
+				data:{
+					movieArr:[
+						{'id':1,'title':'调酒师','data':'2020-03-13'},
+						{'id':2,'title':'危险记忆','data':'2020-03-20'},
+						{'id':3,'title':'恋上美人鱼','data':'2020-03-20'}
+					]
+				},
+				router:router
+			})
+		</script>
+	</body>
+</html>
