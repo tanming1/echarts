@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="../js/vue.js"></script>
+		<script src="../js/vue-router.js"></script>
+		<script src="../js/axios.min.js"></script>
+	</head>
+	<style>
+		.list{
+			width: 300px;
+			height: 300px;
+			background-color: #FAFAD2;
+			border: #00FFFF 1px solid;
+		}
+		.hehe{
+			border: 1px solid black;
+			width: 100px;
+			height: 100px;
+			background: #CCCCCC;
+		}
+		.hehe1{
+			border: 1px solid black;
+			width: 100px;
+			height: 100px;
+			background: #fff;
+		}
+		.myfooter1{
+			width: 200px;
+			height: 200px;
+			background: #00FFFF;
+		}
+		.myfooter2{
+			width: 180px;
+			height: 180px;
+			background: #FF0000;
+		}
+	</style>
+	<body>
+		<div id="app">
+			<router-link to="/mylist" >电影</router-link>
+			<router-link to="/myitem">影院</router-link>
+			<router-link to="/myfooter">我的</router-link>
+			<router-view></router-view>
+		</div>
+		<script>
+			var mylist = {
+				template:`
+				<div class='list'>
+					<router-link to="/mylist/mylist1">即将上映</router-link>
+					<router-link to="/mylist/mylist2">正在上映</router-link>
+					<router-view></router-view>
+				</div>
+				`,
+			}
+			var myitem = {
+				template:`<div class='list'>影院</div>`,
+			}
+			var myfooter = {
+				template:`<div class='list'>
+				<router-link to="/myfooter/myfooter1">登录</router-link>
+				<router-link to="/myfooter/myfooter2">注册</router-link>
+				<router-view></router-view>
+				</div>`,
+			}
+			
+			var mylist1 = {
+				template:`<div class="hehe">即将上映</div>`,
+			}
+			var mylist2 = {
+				template:`<div class="hehe1">正在上映</div>`,
+			}
+			
+			
+			var myfooter1 = {
+				template:`<div class="myfooter1">登录</div>`,
+			
+			}
+			var myfooter2 = {
+					template:`<div class="myfooter2">注册</div>`,
+			}
+			
+			var routes = [
+				{'path':"/mylist",'component':mylist,
+				children:[
+					{'path':"mylist1",'component':mylist1},
+					{'path':"mylist2",'component':mylist2}
+				]
+				},
+				{'path':"/myitem",'component':myitem},
+				{'path':"/myfooter",'component':myfooter,
+				children:[
+					{'path':"myfooter1",'component':myfooter1},
+					{'path':"myfooter2",'component':myfooter2}
+				]
+				}
+			]
+			
+			
+			var router = new VueRouter({
+				routes:routes
+			})
+			
+			
+			var vm = new Vue({
+				el:'#app',
+				data:{},
+				router:router
+			})
+		</script>
+	</body>
+</html>
